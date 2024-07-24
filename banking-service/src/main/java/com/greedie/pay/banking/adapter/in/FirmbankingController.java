@@ -32,4 +32,11 @@ public class FirmbankingController {
 
         return ResponseEntity.ok(firmbankingRequest.getFirmbankingStatus());
     }
+
+    @PostMapping("/register/bankAccount")
+    public ResponseEntity<Object> registerBankAccount(
+            @RequestBody RegisterBankAccountRequest body
+    ) {
+
+    }
 }
