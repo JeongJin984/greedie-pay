@@ -7,14 +7,13 @@ import java.util.UUID;
 
 @Component
 public class FirmBankingRequestMapper {
-    public FirmbankingRequest mapDomainToEntity(final FirmbankingRequestEntity entity, UUID uuid) {
+    public FirmbankingRequest mapDomainToEntity(final FirmbankingRequestEntity entity) {
         return FirmbankingRequest.generateFirmbankingRequest(
-                uuid,
-                new FirmbankingRequest.FromBankName(entity.getToBankName()),
-                new FirmbankingRequest.FromBankAccountNumber(entity.getFromBankAccountNumber()),
-                new FirmbankingRequest.ToBankName(entity.getToBankName()),
-                new FirmbankingRequest.ToBankAccountNumber(entity.getToBankAccountNumber()),
-                new FirmbankingRequest.MoneyAmount(entity.getMoneyAmount()),
+                entity.getToBankName(),
+                entity.getFromBankAccountNumber(),
+                entity.getToBankName(),
+                entity.getToBankAccountNumber(),
+                entity.getMoneyAmount(),
                 entity.getFirmbankingRequestStatus()
         );
     }

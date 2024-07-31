@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
 public class FirmbankingServiceAdaptor implements FirmbankingServicePort {
     @Override
     public FirmbankingServiceResponse send(FirmbankingServiceRequest request) {
-        return null;
+        return new FirmbankingServiceResponse(0);
     }
 }

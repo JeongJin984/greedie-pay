@@ -2,4 +2,5 @@ rootProject.name = 'greedie-pay'
 include 'banking-service'
 include 'common'
 include 'membership-service'
+include 'money-service'
 

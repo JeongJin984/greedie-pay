@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class FirmbankingRequest {
-    private final UUID requestId;
+    private final String requestId;
     private final String fromBankName;
     private final String fromBankAccountNumber;
     private final String toBankName;
@@ -24,31 +24,24 @@ public class FirmbankingRequest {
     private final FirmbankingRequestStatus firmbankingStatus;
 
     public static FirmbankingRequest generateFirmbankingRequest(
-            UUID requestId,
-            FromBankName fromBankName,
-            FromBankAccountNumber fromBankAccountNumber,
-            ToBankName toBankName,
-            ToBankAccountNumber toBankAccountNumber,
-            MoneyAmount moneyAmount,
+            String fromBankName,
+            String fromBankAccountNumber,
+            String toBankName,
+            String toBankAccountNumber,
+            BigDecimal moneyAmount,
             FirmbankingRequestStatus firmbankingRequestStatus
     ) {
         return new FirmbankingRequest(
-                requestId,
-                fromBankName.fromBankName(),
-                fromBankAccountNumber.fromBankAccountNumber(),
-                toBankName.toBankName(),
-                toBankAccountNumber.toBankAccountNumber(),
-                moneyAmount.moneyAmount(),
+                UUID.randomUUID().toString(),
+                fromBankName,
+                fromBankAccountNumber,
+                toBankName,
+                toBankAccountNumber,
+                moneyAmount,
                 firmbankingRequestStatus
         );
     }
 
-    public record RequestId(String requestId) {}
-    public record FromBankName(String fromBankName) {}
-    public record FromBankAccountNumber(String fromBankAccountNumber) {}
-    public record ToBankName(String toBankName) {}
-    public record ToBankAccountNumber(String toBankAccountNumber) {}
-    public record MoneyAmount(BigDecimal moneyAmount) {}
 
     @Getter
     public enum FirmbankingRequestStatus {

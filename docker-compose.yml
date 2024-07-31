@@ -1,4 +1,9 @@
 version: '3'
+
+networks:
+  payment_network:
+    driver: bridge
+
 services:
   mysql:
     image: mysql
@@ -37,6 +42,3 @@ services:
       - SPRING_DATASOURCE_PASSWORD=admin
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
-networks:
-  payment_network:
-    driver: bridge

@@ -12,6 +12,7 @@ import com.greedie.pay.banking.domain.FirmbankingRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Service
@@ -24,11 +25,11 @@ public class FirmbankingRequestService implements FirmbankingRequestUseCase {
     @Override
     public FirmbankingRequest requestFirmbankingCheckAccount(FirmbankingRequestCommand command) {
         FirmbankingRequestEntity firmbankingRequest = firmbankingRequestPersistencePort.createFirmbankingRequest(
-                new FirmbankingRequest.FromBankName(command.getFromBankName()),
-                new FirmbankingRequest.FromBankAccountNumber(command.getFromAccountNumber()),
-                new FirmbankingRequest.ToBankName(command.getToBankName()),
-                new FirmbankingRequest.ToBankAccountNumber(command.getToAccountNumber()),
-                new FirmbankingRequest.MoneyAmount(command.getMoneyAmount()),
+                command.getFromBankName(),
+                command.getFromAccountNumber(),
+                command.getToBankName(),
+                command.getToAccountNumber(),
+                command.getMoneyAmount(),
                 FirmbankingRequest.FirmbankingRequestStatus.REQUEST
         );
 
@@ -44,6 +45,6 @@ public class FirmbankingRequestService implements FirmbankingRequestUseCase {
         } else {
             firmbankingRequest.setFirmbankingRequestStatus(FirmbankingRequest.FirmbankingRequestStatus.FAIL);
         }
-        return mapper.mapDomainToEntity(firmbankingRequest, UUID.randomUUID());
+        return mapper.mapDomainToEntity(firmbankingRequest);
     }
 }
