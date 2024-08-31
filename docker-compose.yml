@@ -1,14 +1,15 @@
 version: '3'
 
 networks:
-  payment_network:
+  greedie_network:
     driver: bridge
+    external: true
 
 services:
   mysql:
     image: mysql
     networks:
-      - payment_network
+      - greedie_network
     volumes:
       - ./db/conf.d:/etc/mysql/conf.d
       - ./db/data:/var/lib/mysql
@@ -30,7 +31,7 @@ services:
     restart: on-failure
     image: greedie-pay-banking-service:0.0.0
     networks:
-      - payment_network
+      - greedie_network
     ports:
       - "8082:8080"
     depends_on:

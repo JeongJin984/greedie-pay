@@ -48,4 +48,13 @@ public class MemberMoneyPersistenceAdapter implements MemberMoneyPersistencePort
 
         return memberMoneyJpaRepository.save(memberMoney);
     }
+
+    @Override
+    public MemberMoneyJpaEntity findMyMemberMoney(String membershipId, String currency) {
+        return memberMoneyJpaRepository.findByOwnerMemberIdAndCurrency(membershipId, currency)
+                .orElseGet(() -> {
+                    log.warn("MemberMoney not found membershipId={} currency={}", membershipId, currency);
+                    return new MemberMoneyJpaEntity(UUID.randomUUID().toString(), membershipId, BigDecimal.ZERO, currency);
+                });
+    }
 }
